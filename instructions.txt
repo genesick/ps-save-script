@@ -1,0 +1,13 @@
+This is a script that will autosave your currently opened photoshop file in certain intervals.
+By standard its set to 2 second but you can increase this interval if you'd like so.
+
+When launching the program, click on the "START SCRIPT" button. If Photoshop is not open, it will start up Photoshop for you.
+After that, it will show if a document is selected. Select a document and the script window will show what document you have selected.
+After that it will immediately start with auto-saving but also showing some small status messages.
+You can exit the document and select another document you wish to work on.
+Mind you that the auto-save function will be enabled as long as the script window is open. If the script window is not open, auto-save won't be enabled.
+
+You can have multiple files open, but keep in mind that the currently opened document in Photoshop is the one that will be auto-saved.
+
+
+FYI; I have been unable to test this script if there are multiple Photoshop programs (ex. CS5 and CS6).
