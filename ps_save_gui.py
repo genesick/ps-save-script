@@ -1,7 +1,7 @@
 import tkinter as tk
 import win32com.client
 import pywintypes
-import time
+
 
 class PS_SAVE:
     def __init__(self):
