@@ -17,37 +17,45 @@ class PS_SAVE:
         try:
             if self.ps_app is not None:
                 doc = self.ps_app.ActiveDocument
-                self.change_message(f"Opened {doc.Name}", "black")
-                return
-        except pywintypes.com_error as e:
-            print(e)
+                if self.ps_app.ActiveDocument is not None:
+                    doc = self.ps_app.ActiveDocument
+                    self.name = doc.Name
+                else:
+                    self.change_message("No document selected", "black")
+                    self.name = ""
+                    return
+        except pywintypes.com_error:
+            self.change_message("No document selected", "red")
 
-        self.window.after(1000, self.get_document_name)
+        self.window.after(2000, self.get_document_name)
+
 
 
     def save_document(self):
         try:
             if self.ps_app is not None:
                 # Get the active document
-                doc = self.ps_app.ActiveDocument
-                if doc is None:
-                    print("No document selected")
-                    self.change_message("No document selected", "black")
-                    return
-                # Save the document
-                doc.Save()
-                self.name = doc.Name
-                self.change_message(f"{self.name} saved successfully!", "black")
+                if self.ps_app.ActiveDocument is not None:    
+                    print("KOMMER DNE INNHIT")
+                    doc = self.ps_app.ActiveDocument
+                    doc.Save() # Save the document
+                    self.name = doc.Name
+                    self.change_message(f"{self.name} saved successfully!", "black")
+
         except pywintypes.com_error as e:
             message = "Error: " + str(e)
-            self.change_message(message, "red")
+
 
 
     def auto_save(self):
-        self.save_document() # save document
-        self.change_message(f"Auto-saving {self.name}...", "black") # update message
-        self.window.after(1000, self.change_message, f"{self.name} saved successfully!", "black") # update message again after a second
-        self.window.after(2000, self.auto_save) # auto-save every second
+        if self.name is not "": 
+            self.save_document() # save document
+            self.change_message(f"Auto-saving {self.name}...", "black") # update message
+            self.window.after(1000, self.change_message, f"{self.name} saved successfully!", "black") # update message again after a second
+            self.window.after(2000, self.auto_save) # auto-save every second
+        elif self.name == "":
+            print("hallå")
+            #self.change_message("No document selected", "red")
 
 
 
